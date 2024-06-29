@@ -4,6 +4,10 @@ on:
   push:
     branches:
     - main
+env:
+  IMAGE_NAME: docker-registry-exporter
+  TAG: ${{ github.sha }}
+  REGISTRY: ghcr.io
 
 jobs:
 
@@ -13,10 +17,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      IMAGE_NAME: docker-registry-exporter
-      TAG: ${{ github.sha }}
-      REGISTRY: ghcr.io
 
     steps:
     - name: 📥 Checkout Repository
@@ -32,7 +32,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 🚀 Build and push Docker image
+    - name: 🚀 Build and Push Docker image
       id: docker_build
       uses: docker/build-push-action@v5
       with:
