@@ -5,7 +5,7 @@ on:
     branches:
     - main
 env:
-  IMAGE_NAME: docker-registry-exporter
+  IMAGE_NAME: ${{ github.repository }}
   TAG: ${{ github.sha }}
   REGISTRY: ghcr.io
 
@@ -32,6 +32,12 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: 🧲 Extract Docker metadata
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
     - name: 🚀 Build and Push Docker image
       id: docker_build
       uses: docker/build-push-action@v5
@@ -39,7 +45,10 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
     - name: 📝 Docker image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
