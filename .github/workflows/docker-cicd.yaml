@@ -25,6 +25,7 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: 🚀 Build Docker image
+      id: docker_build
       uses: docker/build-push-action@v5
       with:
         context: .
@@ -33,4 +34,4 @@ jobs:
         tags: ${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
     - name: 📝 Docker image digest
-      run: echo ${{ steps.docker/build-push-action.outputs.digest }}
+      run: echo ${{ steps.docker_build.outputs.digest }}
