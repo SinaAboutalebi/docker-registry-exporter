@@ -20,7 +20,7 @@ COPY --from=builder /app/docker-registry-exporter .
 COPY entrypoint.sh /app/entrypoint.sh
 
 # Set default environment variable for the registry address
-ENV REGISTRY_ADDRESS=http://registry:5000
+ENV REGISTRY_ADDRESS=http://docker.io
 
 # Install curl for health check and make the entrypoint script executable
 RUN apk add --no-cache curl && \

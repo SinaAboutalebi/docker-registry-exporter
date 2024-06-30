@@ -50,7 +50,7 @@ jobs:
       run: docker pull ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest
 
     - name: ⏳ Wait for container to start
-      run: docker run --rm -d --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest -e REGISTRY_ADDRESS=docker.io
+      run: docker run -d -e REGISTRY_ADDRESS=docker.io --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest
 
     - run: docker ps -a
 
@@ -62,10 +62,10 @@ jobs:
         until [ $retries -ge 5 ]
         do
           sleep 10
-          docker ps -a | grep healthy && break
+          docker inspect --format='{{json .State.Health.Status}}' test-exporter | grep -q healthy && break
           retries=$((retries+1))
         done
-        docker ps -a | grep healthy || exit 1
+          docker inspect --format='{{json .State.Health.Status}}' test-exporter | grep -q healthy || exit 1
 
     - name: 🧹 Clean up
       run: docker rm -f test-exporter
