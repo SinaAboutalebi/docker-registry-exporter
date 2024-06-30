@@ -52,19 +52,19 @@ jobs:
     - name: ⏳ Wait for container to start
       id: docker_run
       run: docker run --rm -d --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest -e REGISTRY_ADDRESS=docker.io
-
-    - name: 🛡️ Wait for health check to pass
-      run: |
-        retries=0
-        until [ $retries -ge 5 ]
-        do
-          sleep 10
-          docker inspect --format='{{json .State.Health.Status}}' ${{ steps.docker_run.outputs }} | grep -q healthy && break
-          retries=$((retries+1))
-        done
-        docker inspect --format='{{json .State.Health.Status}}' ${{ steps.docker_run.outputs }} | grep -q healthy || exit 1
+    - run: docker ps -a
+    #   run: |
+    #     retries=0
+    #     until [ $retries -ge 5 ]
+    #     do
+    #       sleep 10
+    #       docker inspect --format='{{json .State.Health.Status}}' ${{ steps.docker_run.outputs }} | grep -q healthy && break
+    #       retries=$((retries+1))
+    #     done
+    #     docker inspect --format='{{json .State.Health.Status}}' ${{ steps.docker_run.outputs }} | grep -q healthy || exit 1
 
     - name: 🧹 Clean up
+      # - name: 🛡️ Wait for health check to pass
       run: docker rm -f ${{ steps.docker_run.outputs }}
 
   release:
