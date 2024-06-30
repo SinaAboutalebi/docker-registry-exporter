@@ -52,6 +52,8 @@ jobs:
     - name: ⏳ Wait for container to start
       run: docker run --rm -d --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest -e REGISTRY_ADDRESS=docker.io
 
+    - run: docker ps -a
+
     - name: 🛡️ Wait for health check to pass
       run: |
         sleep 30
@@ -60,10 +62,10 @@ jobs:
         until [ $retries -ge 5 ]
         do
           sleep 10
-          docker ps -a | grep -q healthy && break
+          docker ps -a | grep healthy && break
           retries=$((retries+1))
         done
-        docker ps -a | grep -q healthy || exit 1
+        docker ps -a | grep healthy || exit 1
 
     - name: 🧹 Clean up
       run: docker rm -f test-exporter
