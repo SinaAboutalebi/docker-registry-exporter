@@ -50,7 +50,7 @@ jobs:
       run: docker pull ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest
 
     - name: ⏳ Wait for container to start
-      run: docker run --rm -d --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest
+      run: docker run --rm -d --name test-exporter ${{ secrets.DOCKER_USERNAME }}/docker-registry-exporter:latest -e REGISTRY_ADDRESS=docker.io
 
     - name: 🛡️ Wait for health check to pass
       run: |
