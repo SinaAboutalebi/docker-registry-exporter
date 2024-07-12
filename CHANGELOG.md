@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.3...1.0.4) (2024-07-12)
+
+
+### Bug Fixes
+
+* adjust Dockerfile health check parameters for stability ([cb577c5](https://github.com/SinaAboutalebi/docker-registry-exporter/commit/cb577c5013a00c62cf7e99967228e932d44577df))
+
 ## [1.0.3](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.2...1.0.3) (2024-07-12)
 
 
