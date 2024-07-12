@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.2...1.0.3) (2024-07-12)
+
+
+### Bug Fixes
+
+* correct spacing in docker-registry-exporter script ([f38497c](https://github.com/SinaAboutalebi/docker-registry-exporter/commit/f38497c404627775b23175db561ccc2e6deb8245))
+
 ## [1.0.2](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.1...1.0.2) (2024-07-12)
 
 
