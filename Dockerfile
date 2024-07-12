@@ -33,7 +33,7 @@ USER exporteruser
 
 EXPOSE 9055
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=20s --start-period=120s --retries=3 \
   CMD curl --fail http://localhost:9055/metrics || exit 1
 
 ENTRYPOINT ["/app/entrypoint.sh"]
