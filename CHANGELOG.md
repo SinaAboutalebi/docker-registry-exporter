@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.4...1.1.0) (2025-11-17)
+
+
+### Features
+
+* add docker compose ([ae7745f](https://github.com/SinaAboutalebi/docker-registry-exporter/commit/ae7745fd3c546f3a4cd6810c574435d94067ebeb))
+
 ## [1.0.4](https://github.com/SinaAboutalebi/docker-registry-exporter/compare/1.0.3...1.0.4) (2024-07-12)
 
 
